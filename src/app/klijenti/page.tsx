@@ -1,45 +1,40 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { supabase } from '../../lib/supabase'; // Uvozimo našu vezu s bazom
+import Link from 'next/link';
+
 export default function KlijentiPage() {
-  // Podaci s numeracijom:
-  // 1-9999: Fizičke osobe
-  // 10000+: Pravne osobe
-  const klijenti = [
-    { 
-      id: 1, 
-      naziv: "Ivan Horvat", 
-      oib: "98765432100", 
-      email: "ivan.horvat@gmail.com", 
-      telefon: "091/222-333", 
-      vrsta: "Fizička osoba", 
-      status: "Aktivan" 
-    },
-    { 
-      id: 2, 
-      naziv: "Ana Anić", 
-      oib: "11122233344", 
-      email: "ana.anic@net.hr", 
-      telefon: "098/765-4321", 
-      vrsta: "Fizička osoba", 
-      status: "Neaktivan" 
-    },
-    { 
-      id: 10001, 
-      naziv: "Tech Corp d.o.o.", 
-      oib: "12345678901", 
-      email: "info@techcorp.hr", 
-      telefon: "01/555-333", 
-      vrsta: "Pravna osoba", 
-      status: "Aktivan" 
-    },
-    { 
-      id: 10002, 
-      naziv: "Grad Zagreb", 
-      oib: "55555555555", 
-      email: "pisarnica@zagreb.hr", 
-      telefon: "01/610-1111", 
-      vrsta: "Javno tijelo", 
-      status: "Aktivan" 
-    },
-  ];
+  const [klijenti, setKlijenti] = useState<any[]>([]); // Ovdje ćemo čuvati podatke iz baze
+  const [loading, setLoading] = useState(true); // Da znamo kad se podaci još učitavaju
+  const [error, setError] = useState<string | null>(null);
+
+  // Funkcija koja dohvaća klijente kad se stranica učita
+  useEffect(() => {
+    async function fetchKlijenti() {
+      setLoading(true);
+      
+      // Upit prema Supabaseu: Daj mi sve iz tablice 'klijenti' i sortiraj po ID-u
+      const { data, error } = await supabase
+        .from('klijenti')
+        .select('*')
+        .order('id', { ascending: true });
+
+      if (error) {
+        console.error('Greška:', error);
+        setError('Ne mogu učitati klijente.');
+      } else {
+        setKlijenti(data || []);
+      }
+      
+      setLoading(false);
+    }
+
+    fetchKlijenti();
+  }, []);
+
+  if (loading) return <div className="p-8 text-center text-slate-500">Učitavanje podataka...</div>;
+  if (error) return <div className="p-8 text-center text-red-500">{error}</div>;
 
   return (
     <div className="space-y-6">
@@ -48,30 +43,25 @@ export default function KlijentiPage() {
         <div>
           <h1 className="text-2xl font-bold text-slate-800">Klijenti</h1>
           <p className="text-slate-500 text-sm mt-1">
-            Baza klijenata s numeracijom (1-9999 Fizičke, 10000+ Pravne)
+            Baza klijenata (Podaci iz Supabase baze)
           </p>
         </div>
-       <a href="/klijenti/novi" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-medium shadow-sm transition flex items-center gap-2">
-  <span className="text-xl">+</span>
-  Novi Klijent
-</a>
+        <Link href="/klijenti/novi" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-medium shadow-sm transition flex items-center gap-2">
+          <span className="text-xl">+</span>
+          Novi Klijent
+        </Link>
       </div>
 
-      {/* SEARCH BAR */}
+      {/* SEARCH BAR (Za sada samo vizualan) */}
       <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
           <input 
             type="text" 
-            placeholder="Pretraži po Broju, Nazivu ili OIB-u..." 
-            className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition text-slate-700"
+            placeholder="Pretraži..." 
+            className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition text-slate-700"
           />
         </div>
-        <select className="px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-slate-600 focus:outline-none focus:border-blue-500 cursor-pointer">
-          <option>Svi tipovi</option>
-          <option>Fizičke osobe (1-9999)</option>
-          <option>Pravne osobe (10000+)</option>
-        </select>
       </div>
 
       {/* TABLICA */}
@@ -92,7 +82,6 @@ export default function KlijentiPage() {
             <tbody className="divide-y divide-gray-50">
               {klijenti.map((klijent) => (
                 <tr key={klijent.id} className="hover:bg-blue-50/30 transition group">
-                  {/* KOLONA BROJ */}
                   <td className="px-6 py-4">
                     <span className="font-mono font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded">
                       {klijent.id}
@@ -101,12 +90,13 @@ export default function KlijentiPage() {
                   
                   <td className="px-6 py-4">
                     <div className="font-bold text-slate-800">{klijent.naziv}</div>
+                    <div className="text-xs text-slate-400 mt-0.5">{klijent.adresa}, {klijent.grad}</div>
                   </td>
                   
-                  <td className="px-6 py-4 text-slate-600 font-mono">{klijent.oib}</td>
+                  <td className="px-6 py-4 text-slate-600 font-mono">{klijent.oib || '-'}</td>
                   
                   <td className="px-6 py-4">
-                    <div className="text-slate-700">{klijent.email}</div>
+                    <div className="text-slate-700">{klijent.email || '-'}</div>
                     <div className="text-slate-500 text-xs mt-0.5">{klijent.telefon}</div>
                   </td>
                   
@@ -116,22 +106,15 @@ export default function KlijentiPage() {
                         ? "bg-purple-50 text-purple-700 border-purple-100" 
                         : "bg-blue-50 text-blue-700 border-blue-100"     
                     }`}>
-                      {klijent.vrsta}
+                      {klijent.vrsta === 'fizicka' ? 'Fizička osoba' : 'Pravna osoba'}
                     </span>
                   </td>
                   
                   <td className="px-6 py-4">
-                    {klijent.status === "Aktivan" ? (
-                      <span className="flex items-center gap-1.5 text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-full w-fit">
+                     <span className="flex items-center gap-1.5 text-green-600 text-xs font-bold bg-green-50 px-2.5 py-1 rounded-full w-fit">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                        Aktivan
+                        {klijent.status}
                       </span>
-                    ) : (
-                      <span className="flex items-center gap-1.5 text-gray-500 text-xs font-bold bg-gray-100 px-2.5 py-1 rounded-full w-fit">
-                        <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
-                        Neaktivan
-                      </span>
-                    )}
                   </td>
                   
                   <td className="px-6 py-4 text-right">
