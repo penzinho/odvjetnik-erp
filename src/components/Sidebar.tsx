@@ -15,10 +15,10 @@ export default function Sidebar() {
   };
 
   // Prilagođeni stilovi koji se mijenjaju ovisno o isCollapsed
-  const linkStyle = (path: string) => {
+const linkStyle = (path: string) => {
     const activeClass = isActive(path)
-      ? "bg-blue-50 text-blue-700"
-      : "text-slate-500 hover:bg-gray-50 hover:text-slate-900";
+      ? "bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400" // Aktivno u Dark modu
+      : "text-slate-500 hover:bg-gray-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200"; // Neaktivno u Dark modu
     
     // Ako je skupljeno: centriraj i manji padding. Ako nije: normalan padding.
     const layoutClass = isCollapsed 
@@ -34,8 +34,10 @@ export default function Sidebar() {
   }`;
 
   return (
+    
+    
     <aside 
-      className={`bg-white flex flex-col border-r border-gray-200 h-screen sticky top-0 transition-all duration-300 ${
+      className={`bg-white flex flex-col border-r border-gray-200 h-screen sticky top-0 transition-all duration-300 dark:bg-slate-900 dark:border-slate-800 ${
         isCollapsed ? "w-20" : "w-72"
       }`}
     >
