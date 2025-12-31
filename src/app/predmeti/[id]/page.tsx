@@ -17,7 +17,7 @@ export default async function DetaljiPredmetaPage({ params }: { params: Promise<
   if (error || !predmet) {
     return (
       <div className="p-12 text-center">
-        <h2 className="text-xl font-bold text-slate-800">Predmet nije pronađen</h2>
+        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Predmet nije pronađen</h2>
         <Link href="/predmeti" className="text-blue-600 hover:underline mt-4 block">
           &larr; Natrag na popis
         </Link>

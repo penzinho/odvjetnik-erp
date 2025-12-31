@@ -129,18 +129,18 @@ export default function NoviKlijentPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-8 pb-12">
       <div>
-        <h1 className="text-2xl font-bold text-slate-800">Novi Klijent</h1>
-        <p className="text-slate-500 text-sm mt-1">Unesite podatke za otvaranje novog kartona klijenta.</p>
+        <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Novi Klijent</h1>
+        <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Unesite podatke za otvaranje novog kartona klijenta.</p>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden">
         
         {/* TABS */}
-        <div className="flex border-b border-gray-100">
+        <div className="flex border-b border-gray-100 dark:border-slate-800">
           <button 
             onClick={() => setVrstaKlijenta('fizicka')}
             className={`flex-1 py-4 text-sm font-medium transition-colors ${
-              vrstaKlijenta === 'fizicka' ? 'bg-blue-50 text-blue-700 border-b-2 border-blue-600' : 'text-slate-500 hover:bg-gray-50'
+              vrstaKlijenta === 'fizicka' ? 'bg-blue-50 text-blue-700 border-b-2 border-blue-600 dark:bg-blue-900/30 dark:text-blue-300' : 'text-slate-500 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800'
             }`}
           >
             👤 Fizička osoba
@@ -148,7 +148,7 @@ export default function NoviKlijentPage() {
           <button 
             onClick={() => setVrstaKlijenta('pravna')}
             className={`flex-1 py-4 text-sm font-medium transition-colors ${
-              vrstaKlijenta === 'pravna' ? 'bg-purple-50 text-purple-700 border-b-2 border-purple-600' : 'text-slate-500 hover:bg-gray-50'
+              vrstaKlijenta === 'pravna' ? 'bg-purple-50 text-purple-700 border-b-2 border-purple-600 dark:bg-purple-900/30 dark:text-purple-300' : 'text-slate-500 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800'
             }`}
           >
             🏢 Pravna osoba
@@ -159,8 +159,8 @@ export default function NoviKlijentPage() {
           
           {/* 1. OSNOVNI PODACI */}
           <div>
-            <h3 className="text-slate-800 font-bold mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-500">1</span>
+            <h3 className="text-slate-800 dark:text-slate-100 font-bold mb-4 flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs text-slate-500 dark:text-slate-400">1</span>
               Osnovni podaci
             </h3>
             
@@ -168,58 +168,58 @@ export default function NoviKlijentPage() {
               {vrstaKlijenta === 'fizicka' ? (
                 <>
                   <div className="space-y-1">
-                    <label className="text-xs font-semibold text-slate-500 uppercase">Ime *</label>
-                    <input required type="text" value={ime} onChange={e => setIme(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition" />
+                    <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Ime *</label>
+                    <input required type="text" value={ime} onChange={e => setIme(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition text-slate-800 dark:text-slate-100" />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-xs font-semibold text-slate-500 uppercase">Prezime *</label>
-                    <input required type="text" value={prezime} onChange={e => setPrezime(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition" />
+                    <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Prezime *</label>
+                    <input required type="text" value={prezime} onChange={e => setPrezime(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition text-slate-800 dark:text-slate-100" />
                   </div>
                 </>
               ) : (
                 <div className="col-span-2 space-y-1">
-                  <label className="text-xs font-semibold text-slate-500 uppercase">Naziv Tvrtke / Institucije *</label>
-                  <input required type="text" value={nazivTvrtke} onChange={e => setNazivTvrtke(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-purple-500 outline-none transition" />
+                  <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Naziv Tvrtke / Institucije *</label>
+                  <input required type="text" value={nazivTvrtke} onChange={e => setNazivTvrtke(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-purple-500 outline-none transition text-slate-800 dark:text-slate-100" />
                 </div>
               )}
               
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">OIB</label>
-                <input type="text" value={oib} onChange={e => setOib(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition font-mono" maxLength={11} />
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">OIB</label>
+                <input type="text" value={oib} onChange={e => setOib(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition font-mono text-slate-800 dark:text-slate-100" maxLength={11} />
               </div>
             </div>
           </div>
 
-          <hr className="border-gray-50" />
+          <hr className="border-gray-50 dark:border-slate-800" />
 
           {/* 2. ADRESA */}
           <div>
-            <h3 className="text-slate-800 font-bold mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-500">2</span>
+            <h3 className="text-slate-800 dark:text-slate-100 font-bold mb-4 flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs text-slate-500 dark:text-slate-400">2</span>
               Adresa i Kontakt
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2 space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">Ulica i kućni broj</label>
-                <input type="text" value={adresa} onChange={e => setAdresa(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition" />
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Ulica i kućni broj</label>
+                <input type="text" value={adresa} onChange={e => setAdresa(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition text-slate-800 dark:text-slate-100" />
               </div>
 
               {/* GRAD */}
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase flex justify-between">
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase flex justify-between">
                   Grad
                   {!noviGradMode ? (
-                    <button type="button" onClick={() => { setNoviGradMode(true); setOdabraniGrad(''); }} className="text-blue-600 hover:text-blue-700 text-[10px] font-bold uppercase cursor-pointer">+ Dodaj novi</button>
+                    <button type="button" onClick={() => { setNoviGradMode(true); setOdabraniGrad(''); }} className="text-blue-600 dark:text-blue-400 hover:text-blue-700 text-[10px] font-bold uppercase cursor-pointer">+ Dodaj novi</button>
                   ) : (
                      <button type="button" onClick={() => setNoviGradMode(false)} className="text-red-500 hover:text-red-700 text-[10px] font-bold uppercase cursor-pointer">x Odustani</button>
                   )}
                 </label>
                 
                 {noviGradMode ? (
-                  <input type="text" value={odabraniGrad} onChange={e => setOdabraniGrad(e.target.value)} className="w-full px-4 py-2 bg-white border-2 border-blue-100 text-blue-900 rounded-lg focus:border-blue-500 outline-none transition" placeholder="Unesite grad..." />
+                  <input type="text" value={odabraniGrad} onChange={e => setOdabraniGrad(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-slate-900 border-2 border-blue-100 dark:border-blue-900 text-blue-900 dark:text-blue-200 rounded-lg focus:border-blue-500 outline-none transition" placeholder="Unesite grad..." />
                 ) : (
-                  <select value={odabraniGrad} onChange={handleGradChange} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer text-slate-700">
+                  <select value={odabraniGrad} onChange={handleGradChange} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer text-slate-700 dark:text-slate-200">
                     <option value="">Odaberi grad...</option>
                     {gradoviPodaci.map(g => <option key={g.naziv} value={g.naziv}>{g.naziv}</option>)}
                   </select>
@@ -228,49 +228,49 @@ export default function NoviKlijentPage() {
 
               {/* PBR */}
                <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">Poštanski broj</label>
-                <input type="text" value={postanskiBroj} onChange={e => setPostanskiBroj(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition" />
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Poštanski broj</label>
+                <input type="text" value={postanskiBroj} onChange={e => setPostanskiBroj(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition text-slate-800 dark:text-slate-100" />
               </div>
 
               {/* DRŽAVA */}
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase flex justify-between">Država</label>
-                <select value={odabranaDrzava} onChange={e => setOdabranaDrzava(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer text-slate-700">
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase flex justify-between">Država</label>
+                <select value={odabranaDrzava} onChange={e => setOdabranaDrzava(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer text-slate-700 dark:text-slate-200">
                     <option value="Hrvatska">Hrvatska</option>
                     {drzave.filter(d => d !== 'Hrvatska').map(d => <option key={d} value={d}>{d}</option>)}
                 </select>
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">Telefon</label>
-                <input type="text" value={telefon} onChange={e => setTelefon(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition" />
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Telefon</label>
+                <input type="text" value={telefon} onChange={e => setTelefon(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition text-slate-800 dark:text-slate-100" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">E-mail</label>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition" />
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">E-mail</label>
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition text-slate-800 dark:text-slate-100" />
               </div>
             </div>
           </div>
 
-          <hr className="border-gray-50" />
+          <hr className="border-gray-50 dark:border-slate-800" />
 
           {/* 3. FINANCIJE */}
           <div>
-             <h3 className="text-slate-800 font-bold mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-500">3</span>
+             <h3 className="text-slate-800 dark:text-slate-100 font-bold mb-4 flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs text-slate-500 dark:text-slate-400">3</span>
               Financijski podaci
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2 space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">IBAN</label>
-                <input type="text" value={iban} onChange={e => setIban(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg outline-none transition font-mono uppercase" />
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">IBAN</label>
+                <input type="text" value={iban} onChange={e => setIban(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg outline-none transition font-mono uppercase text-slate-800 dark:text-slate-100" />
               </div>
             </div>
           </div>
 
           {/* GUMBI */}
-          <div className="pt-6 flex items-center justify-end gap-4 border-t border-gray-50">
-            <button type="button" onClick={() => router.back()} className="px-6 py-3 text-slate-600 font-medium hover:bg-gray-50 rounded-xl transition">Odustani</button>
+          <div className="pt-6 flex items-center justify-end gap-4 border-t border-gray-50 dark:border-slate-800">
+            <button type="button" onClick={() => router.back()} className="px-6 py-3 text-slate-600 dark:text-slate-200 font-medium hover:bg-gray-50 dark:hover:bg-slate-800 rounded-xl transition">Odustani</button>
             <button 
               type="submit" 
               disabled={loading}

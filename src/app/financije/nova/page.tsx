@@ -149,11 +149,11 @@ export default function NovaFakturaPage() {
       
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800">Nova Faktura</h1>
-          <p className="text-slate-500 text-sm mt-1">Kreiranje izlaznog računa</p>
+          <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Nova Faktura</h1>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Kreiranje izlaznog računa</p>
         </div>
         <div className="flex gap-3">
-            <Link href="/financije" className="bg-white border border-gray-200 text-slate-600 hover:bg-gray-50 px-5 py-2.5 rounded-xl font-medium shadow-sm transition">
+            <Link href="/financije" className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-slate-600 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800 px-5 py-2.5 rounded-xl font-medium shadow-sm transition">
                 Odustani
             </Link>
             <button 
@@ -166,16 +166,16 @@ export default function NovaFakturaPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden">
         
         {/* SEKCIJA 1: GLAVNI PODACI */}
-        <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-12 border-b border-gray-100">
+        <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-12 border-b border-gray-100 dark:border-slate-800">
             
             {/* LIJEVO: KLIJENT */}
             <div className="space-y-4">
-                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Primatelj računa</h3>
+                <h3 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Primatelj računa</h3>
                 <select 
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-blue-500 outline-none transition cursor-pointer font-medium text-slate-700"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:border-blue-500 outline-none transition cursor-pointer font-medium text-slate-700 dark:text-slate-200"
                     onChange={handleKlijentChange}
                     value={odabraniKlijentId}
                 >
@@ -186,7 +186,7 @@ export default function NovaFakturaPage() {
                 </select>
 
                 {odabraniKlijentDetalji && (
-                    <div className="p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm text-blue-900 space-y-1">
+                    <div className="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl border border-blue-100 dark:border-blue-800 text-sm text-blue-900 dark:text-blue-200 space-y-1">
                         <p className="font-bold">{odabraniKlijentDetalji.naziv}</p>
                         <p>{odabraniKlijentDetalji.adresa}, {odabraniKlijentDetalji.grad}</p>
                         <p>OIB: {odabraniKlijentDetalji.oib}</p>
@@ -196,24 +196,24 @@ export default function NovaFakturaPage() {
 
             {/* DESNO: DETALJI RAČUNA */}
             <div className="space-y-4">
-                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Detalji računa</h3>
+                <h3 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Detalji računa</h3>
                 <div className="grid grid-cols-2 gap-4">
                     <div className="col-span-2 space-y-1">
-                        <label className="text-xs font-semibold text-slate-500">Broj računa</label>
-                        <input type="text" value={brojRacuna} onChange={e => setBrojRacuna(e.target.value)} className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none font-mono" />
+                        <label className="text-xs font-semibold text-slate-500 dark:text-slate-400">Broj računa</label>
+                        <input type="text" value={brojRacuna} onChange={e => setBrojRacuna(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none font-mono text-slate-800 dark:text-slate-100" />
                     </div>
                     <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-500">Datum izdavanja</label>
-                        <input type="date" value={datumIzdavanja} onChange={e => setDatumIzdavanja(e.target.value)} className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none" />
+                        <label className="text-xs font-semibold text-slate-500 dark:text-slate-400">Datum izdavanja</label>
+                        <input type="date" value={datumIzdavanja} onChange={e => setDatumIzdavanja(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none text-slate-800 dark:text-slate-100" />
                     </div>
                     <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-500">Datum dospijeća</label>
-                        <input type="date" value={datumDospijeca} onChange={e => setDatumDospijeca(e.target.value)} className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none" />
+                        <label className="text-xs font-semibold text-slate-500 dark:text-slate-400">Datum dospijeća</label>
+                        <input type="date" value={datumDospijeca} onChange={e => setDatumDospijeca(e.target.value)} className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none text-slate-800 dark:text-slate-100" />
                     </div>
                     <div className="col-span-2 space-y-1">
-                        <label className="text-xs font-semibold text-slate-500">Vezani predmet (opcionalno)</label>
+                        <label className="text-xs font-semibold text-slate-500 dark:text-slate-400">Vezani predmet (opcionalno)</label>
                         <select 
-                            className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer"
+                            className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer text-slate-700 dark:text-slate-200"
                             value={odabraniPredmetId}
                             onChange={e => setOdabraniPredmetId(e.target.value)}
                             disabled={!odabraniKlijentId}
@@ -229,11 +229,11 @@ export default function NovaFakturaPage() {
         </div>
 
         {/* SEKCIJA 2: STAVKE RAČUNA */}
-        <div className="p-8 bg-gray-50/30">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Stavke i usluge</h3>
+        <div className="p-8 bg-gray-50/30 dark:bg-slate-900/40">
+            <h3 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4">Stavke i usluge</h3>
             
             <div className="space-y-3">
-                <div className="grid grid-cols-12 gap-4 px-4 text-xs font-semibold text-slate-500 uppercase">
+                <div className="grid grid-cols-12 gap-4 px-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">
                     <div className="col-span-6">Opis usluge</div>
                     <div className="col-span-2 text-right">Količina</div>
                     <div className="col-span-2 text-right">Cijena (€)</div>
@@ -246,7 +246,7 @@ export default function NovaFakturaPage() {
                             <input 
                                 type="text" 
                                 placeholder="Unesite opis usluge..." 
-                                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition shadow-sm"
+                                className="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition shadow-sm text-slate-800 dark:text-slate-100"
                                 value={item.opis}
                                 onChange={(e) => handleItemChange(item.id, 'opis', e.target.value)}
                             />
@@ -255,7 +255,7 @@ export default function NovaFakturaPage() {
                             <input 
                                 type="number" 
                                 min="1"
-                                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition text-right shadow-sm"
+                                className="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition text-right shadow-sm text-slate-800 dark:text-slate-100"
                                 value={item.kolicina}
                                 onChange={(e) => handleItemChange(item.id, 'kolicina', parseFloat(e.target.value) || 0)}
                             />
@@ -264,22 +264,22 @@ export default function NovaFakturaPage() {
                             <input 
                                 type="number" 
                                 min="0"
-                                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition text-right shadow-sm"
+                                className="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition text-right shadow-sm text-slate-800 dark:text-slate-100"
                                 value={item.cijena}
                                 onChange={(e) => handleItemChange(item.id, 'cijena', parseFloat(e.target.value) || 0)}
                             />
                         </div>
                         <div className="col-span-2 flex items-center justify-end gap-3">
-                            <span className="font-bold text-slate-700 py-3">
+                            <span className="font-bold text-slate-700 dark:text-slate-200 py-3">
                                 {(item.kolicina * item.cijena).toFixed(2)} €
                             </span>
-                            <button onClick={() => obrisiRed(item.id)} className="text-gray-300 hover:text-red-500 transition p-1">✕</button>
+                            <button onClick={() => obrisiRed(item.id)} className="text-gray-300 dark:text-slate-600 hover:text-red-500 transition p-1">✕</button>
                         </div>
                     </div>
                 ))}
 
                 <div className="pt-2">
-                    <button onClick={dodajRed} className="text-blue-600 text-sm font-bold hover:text-blue-700 flex items-center gap-1">
+                    <button onClick={dodajRed} className="text-blue-600 dark:text-blue-400 text-sm font-bold hover:text-blue-700 flex items-center gap-1">
                         + Dodaj novu stavku
                     </button>
                 </div>
@@ -287,18 +287,18 @@ export default function NovaFakturaPage() {
         </div>
 
         {/* SEKCIJA 3: ZBROJ */}
-        <div className="p-8 bg-white border-t border-gray-100 flex justify-end">
+        <div className="p-8 bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800 flex justify-end">
             <div className="w-full md:w-1/3 space-y-3">
-                <div className="flex justify-between text-slate-500 text-sm">
+                <div className="flex justify-between text-slate-500 dark:text-slate-400 text-sm">
                     <span>Osnovica (Subtotal):</span>
                     <span className="font-medium">{subtotal.toFixed(2)} €</span>
                 </div>
-                <div className="flex justify-between text-slate-500 text-sm">
+                <div className="flex justify-between text-slate-500 dark:text-slate-400 text-sm">
                     <span>PDV (25%):</span>
                     <span className="font-medium">{pdv.toFixed(2)} €</span>
                 </div>
-                <div className="h-px bg-gray-200 my-2"></div>
-                <div className="flex justify-between text-slate-800 text-xl font-bold">
+                <div className="h-px bg-gray-200 dark:bg-slate-800 my-2"></div>
+                <div className="flex justify-between text-slate-800 dark:text-slate-100 text-xl font-bold">
                     <span>Ukupno za platiti:</span>
                     <span>{total.toFixed(2)} €</span>
                 </div>

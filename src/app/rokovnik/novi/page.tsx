@@ -67,19 +67,19 @@ export default function NoviRokPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8 pb-12">
       <div>
-        <h1 className="text-2xl font-bold text-slate-800">Novi unos u rokovnik</h1>
-        <p className="text-slate-500 text-sm mt-1">Dodajte ročište, sastanak ili rok za podnesak.</p>
+        <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Novi unos u rokovnik</h1>
+        <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Dodajte ročište, sastanak ili rok za podnesak.</p>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden p-8">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden p-8">
         <form className="space-y-6" onSubmit={handleSpremi}>
           
           {/* ODABIR PREDMETA */}
           <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-500 uppercase">Vezani predmet *</label>
+            <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Vezani predmet *</label>
             <select 
               required
-              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer"
+              className="w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer"
               value={predmetId}
               onChange={(e) => setPredmetId(e.target.value)}
             >
@@ -95,12 +95,12 @@ export default function NoviRokPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* NASLOV */}
             <div className="md:col-span-2 space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase">Naziv radnje *</label>
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Naziv radnje *</label>
                 <input 
                   required
                   type="text" 
                   placeholder="npr. Glavna rasprava"
-                  className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition"
+                  className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-lg focus:border-blue-500 outline-none transition"
                   value={naslov}
                   onChange={e => setNaslov(e.target.value)}
                 />
@@ -108,20 +108,20 @@ export default function NoviRokPage() {
 
             {/* DATUM I VRIJEME */}
             <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase">Datum *</label>
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Datum *</label>
                 <input 
                   required
                   type="date" 
-                  className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition"
+                  className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-lg focus:border-blue-500 outline-none transition"
                   value={datum}
                   onChange={e => setDatum(e.target.value)}
                 />
             </div>
             <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase">Vrijeme</label>
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Vrijeme</label>
                 <input 
                   type="time" 
-                  className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition"
+                  className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-lg focus:border-blue-500 outline-none transition"
                   value={vrijeme}
                   onChange={e => setVrijeme(e.target.value)}
                 />
@@ -129,9 +129,9 @@ export default function NoviRokPage() {
 
             {/* VRSTA */}
             <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase">Vrsta</label>
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Vrsta</label>
                 <select 
-                  className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer"
+                  className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer"
                   value={vrsta}
                   onChange={e => setVrsta(e.target.value)}
                 >
@@ -146,11 +146,11 @@ export default function NoviRokPage() {
 
             {/* MJESTO */}
             <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase">Mjesto / Sudnica</label>
+                <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Mjesto / Sudnica</label>
                 <input 
                   type="text" 
                   placeholder="npr. OGS ZG, soba 102"
-                  className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition"
+                  className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-lg focus:border-blue-500 outline-none transition"
                   value={mjesto}
                   onChange={e => setMjesto(e.target.value)}
                 />
@@ -159,18 +159,18 @@ export default function NoviRokPage() {
 
           {/* OPIS */}
           <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-500 uppercase">Napomena / Opis</label>
+            <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Napomena / Opis</label>
             <textarea 
               rows={3}
               placeholder="Dodatne bilješke..."
-              className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition"
+              className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-lg focus:border-blue-500 outline-none transition"
               value={opis}
               onChange={e => setOpis(e.target.value)}
             ></textarea>
           </div>
 
-          <div className="pt-4 flex items-center justify-end gap-4 border-t border-gray-50">
-            <Link href="/rokovnik" className="px-6 py-3 text-slate-600 font-medium hover:bg-gray-50 rounded-xl transition">
+          <div className="pt-4 flex items-center justify-end gap-4 border-t border-gray-50 dark:border-slate-800">
+            <Link href="/rokovnik" className="px-6 py-3 text-slate-600 dark:text-slate-200 font-medium hover:bg-gray-50 dark:hover:bg-slate-800 rounded-xl transition">
               Odustani
             </Link>
             <button 

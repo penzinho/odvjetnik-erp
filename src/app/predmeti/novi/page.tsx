@@ -116,24 +116,24 @@ export default function NoviPredmetPage() {
     <div className="max-w-4xl mx-auto space-y-8 pb-12">
       
       <div>
-        <h1 className="text-2xl font-bold text-slate-800">Otvaranje Novog Spisa</h1>
-        <p className="text-slate-500 text-sm mt-1">Unesite osnovne podatke. Broj i naziv se generiraju automatski.</p>
+        <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Otvaranje Novog Spisa</h1>
+        <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Unesite osnovne podatke. Broj i naziv se generiraju automatski.</p>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden">
         
         {/* PREVIEW TRAKA */}
-        <div className="bg-slate-50 border-b border-gray-200 p-6 flex items-center gap-6">
+        <div className="bg-slate-50 dark:bg-slate-900/60 border-b border-gray-200 dark:border-slate-800 p-6 flex items-center gap-6">
            <div className="flex flex-col">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Broj spisa</span>
+              <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Broj spisa</span>
               <span className="text-2xl font-mono font-bold text-blue-600">
                 {puniBrojSpisa}
               </span>
            </div>
-           <div className="h-10 w-px bg-gray-300"></div>
+           <div className="h-10 w-px bg-gray-300 dark:bg-slate-700"></div>
            <div className="flex flex-col">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Naziv predmeta (Auto)</span>
-              <span className={`text-lg font-medium ${klijentNaziv && protustranka ? 'text-slate-800' : 'text-gray-400 italic'}`}>
+              <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Naziv predmeta (Auto)</span>
+              <span className={`text-lg font-medium ${klijentNaziv && protustranka ? 'text-slate-800 dark:text-slate-100' : 'text-gray-400 dark:text-slate-500 italic'}`}>
                 {nazivPredmeta}
               </span>
            </div>
@@ -143,18 +143,18 @@ export default function NoviPredmetPage() {
           
           {/* 1. STRANKE */}
           <div>
-            <h3 className="text-slate-800 font-bold mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-500">1</span>
+            <h3 className="text-slate-800 dark:text-slate-100 font-bold mb-4 flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs text-slate-500 dark:text-slate-400">1</span>
               Stranke
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">Zastupamo (Klijent) *</label>
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Zastupamo (Klijent) *</label>
                 <select 
                   required
-                  className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer font-medium text-slate-700"
+                  className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer font-medium text-slate-700 dark:text-slate-200"
                   onChange={handleKlijentChange}
                   value={selectedKlijentId}
                 >
@@ -166,11 +166,11 @@ export default function NoviPredmetPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">Protivna strana *</label>
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Protivna strana *</label>
                 <input 
                   required
                   type="text" 
-                  className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition"
+                  className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition text-slate-800 dark:text-slate-100"
                   placeholder="npr. Croatia Osiguranje"
                   value={protustranka}
                   onChange={(e) => setProtustranka(e.target.value)}
@@ -179,20 +179,20 @@ export default function NoviPredmetPage() {
             </div>
           </div>
 
-          <hr className="border-gray-50" />
+          <hr className="border-gray-50 dark:border-slate-800" />
 
           {/* 2. DETALJI */}
           <div>
-            <h3 className="text-slate-800 font-bold mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-500">2</span>
+            <h3 className="text-slate-800 dark:text-slate-100 font-bold mb-4 flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs text-slate-500 dark:text-slate-400">2</span>
               Detalji predmeta
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">Vrsta predmeta</label>
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Vrsta predmeta</label>
                 <select 
-                  className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer text-slate-700"
+                  className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:border-blue-500 outline-none transition cursor-pointer text-slate-700 dark:text-slate-200"
                   value={vrsta}
                   onChange={(e) => setVrsta(e.target.value)}
                 >
@@ -207,41 +207,41 @@ export default function NoviPredmetPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">VPS</label>
-                <input type="text" value={vps} onChange={e => setVps(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg outline-none transition" placeholder="npr. 10.000,00 EUR" />
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">VPS</label>
+                <input type="text" value={vps} onChange={e => setVps(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg outline-none transition text-slate-800 dark:text-slate-100" placeholder="npr. 10.000,00 EUR" />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">Nadležno tijelo / Sud</label>
-                <input type="text" value={sud} onChange={e => setSud(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg outline-none transition" />
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Nadležno tijelo / Sud</label>
+                <input type="text" value={sud} onChange={e => setSud(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg outline-none transition text-slate-800 dark:text-slate-100" />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">Poslovni broj</label>
-                <input type="text" value={poslovniBroj} onChange={e => setPoslovniBroj(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg outline-none transition" placeholder="npr. P-1234/2024" />
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Poslovni broj</label>
+                <input type="text" value={poslovniBroj} onChange={e => setPoslovniBroj(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg outline-none transition text-slate-800 dark:text-slate-100" placeholder="npr. P-1234/2024" />
               </div>
             </div>
           </div>
 
-          <hr className="border-gray-50" />
+          <hr className="border-gray-50 dark:border-slate-800" />
 
            {/* 3. ZADUŽENJE */}
            <div>
-            <h3 className="text-slate-800 font-bold mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-500">3</span>
+            <h3 className="text-slate-800 dark:text-slate-100 font-bold mb-4 flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs text-slate-500 dark:text-slate-400">3</span>
               Zaduženje
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-500 uppercase">Nositelj spisa</label>
-                <input type="text" value={voditelj} onChange={e => setVoditelj(e.target.value)} className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg outline-none transition" placeholder="Ime odvjetnika" />
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Nositelj spisa</label>
+                <input type="text" value={voditelj} onChange={e => setVoditelj(e.target.value)} className="w-full px-4 py-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg outline-none transition text-slate-800 dark:text-slate-100" placeholder="Ime odvjetnika" />
               </div>
             </div>
            </div>
 
-          <div className="pt-6 flex items-center justify-end gap-4 border-t border-gray-50">
-            <Link href="/predmeti" className="px-6 py-3 text-slate-600 font-medium hover:bg-gray-50 rounded-xl transition">
+          <div className="pt-6 flex items-center justify-end gap-4 border-t border-gray-50 dark:border-slate-800">
+            <Link href="/predmeti" className="px-6 py-3 text-slate-600 dark:text-slate-200 font-medium hover:bg-gray-50 dark:hover:bg-slate-800 rounded-xl transition">
               Odustani
             </Link>
             <button 

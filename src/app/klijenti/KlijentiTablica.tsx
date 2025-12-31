@@ -61,7 +61,7 @@ export default function KlijentiTablica({ klijenti }: { klijenti: Klijent[] }) {
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Pretraži po imenu ili OIB-u..."
-            className="pl-8 bg-white"
+            className="pl-8 bg-white dark:bg-slate-900 dark:border-slate-700"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -81,7 +81,7 @@ export default function KlijentiTablica({ klijenti }: { klijenti: Klijent[] }) {
         </CardHeader>
         <CardContent className="p-0">
           <Table>
-            <TableHeader className="bg-slate-50">
+            <TableHeader className="bg-slate-50 dark:bg-slate-900/60">
               <TableRow>
                 {/* PROMJENA: Umjesto "ID" piše "Broj" */}
                 <TableHead className="w-[80px]">Broj</TableHead>
@@ -101,41 +101,41 @@ export default function KlijentiTablica({ klijenti }: { klijenti: Klijent[] }) {
                 </TableRow>
               ) : (
                 filtriraniKlijenti.map((k) => (
-                  <TableRow key={k.id} className="hover:bg-slate-50/50 cursor-pointer group">
+                  <TableRow key={k.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/60 cursor-pointer group">
                     {/* PROMJENA: Maknut znak # ispred broja */}
-                    <TableCell className="font-mono text-xs font-medium text-slate-500">
+                    <TableCell className="font-mono text-xs font-medium text-slate-500 dark:text-slate-400">
                       {k.id}
                     </TableCell>
                     
                     <TableCell>
                       <div className="flex items-center gap-3">
-                        <Avatar className="h-9 w-9 border bg-slate-100">
-                          <AvatarFallback className="text-slate-700 text-xs font-bold">
+                        <Avatar className="h-9 w-9 border bg-slate-100 dark:bg-slate-800 dark:border-slate-700">
+                          <AvatarFallback className="text-slate-700 dark:text-slate-200 text-xs font-bold">
                             {getInitials(k.naziv)}
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex flex-col">
-                          <span className="font-semibold text-slate-900">{k.naziv}</span>
-                          <span className="text-xs text-slate-500">{k.grad || '-'}</span>
+                          <span className="font-semibold text-slate-900 dark:text-slate-100">{k.naziv}</span>
+                          <span className="text-xs text-slate-500 dark:text-slate-400">{k.grad || '-'}</span>
                         </div>
                       </div>
                     </TableCell>
 
                     <TableCell>
-                      <div className="flex flex-col gap-1 text-sm text-slate-600">
+                      <div className="flex flex-col gap-1 text-sm text-slate-600 dark:text-slate-300">
                          {k.email && (
                            <div className="flex items-center gap-1.5">
-                             <Mail className="h-3 w-3 text-slate-400" />
+                             <Mail className="h-3 w-3 text-slate-400 dark:text-slate-500" />
                              <span className="truncate max-w-[150px]">{k.email}</span>
                            </div>
                          )}
                          {k.telefon && (
                            <div className="flex items-center gap-1.5">
-                             <Phone className="h-3 w-3 text-slate-400" />
+                             <Phone className="h-3 w-3 text-slate-400 dark:text-slate-500" />
                              <span>{k.telefon}</span>
                            </div>
                          )}
-                         {!k.email && !k.telefon && <span className="text-slate-400">-</span>}
+                         {!k.email && !k.telefon && <span className="text-slate-400 dark:text-slate-500">-</span>}
                       </div>
                     </TableCell>
 
@@ -149,7 +149,7 @@ export default function KlijentiTablica({ klijenti }: { klijenti: Klijent[] }) {
                     <TableCell>
                       <Badge 
                         variant="outline" 
-                        className={k.status === 'Aktivan' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-gray-100 text-gray-500'}
+                        className={k.status === 'Aktivan' ? 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800' : 'bg-gray-100 text-gray-500 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700'}
                       >
                         {k.status}
                       </Badge>

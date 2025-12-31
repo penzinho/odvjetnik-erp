@@ -92,14 +92,14 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
       {/* --- HEADER --- */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Rokovnik</h1>
-          <p className="text-slate-500 text-sm">Pregled obaveza i ročišta</p>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Rokovnik</h1>
+          <p className="text-slate-500 dark:text-slate-400 text-sm">Pregled obaveza i ročišta</p>
         </div>
         
         <div className="flex items-center gap-2">
             {/* Odabir pogleda */}
             <Select value={view} onValueChange={(v: any) => setView(v)}>
-              <SelectTrigger className="w-[140px] bg-white">
+              <SelectTrigger className="w-[140px] bg-white dark:bg-slate-900 dark:border-slate-700">
                 <SelectValue placeholder="Pogled" />
               </SelectTrigger>
               <SelectContent>
@@ -110,11 +110,11 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
             </Select>
 
             {/* Navigacija */}
-            <div className="flex items-center border rounded-md bg-white shadow-sm">
+            <div className="flex items-center border rounded-md bg-white dark:bg-slate-900 dark:border-slate-700 shadow-sm">
                 <Button variant="ghost" size="icon" onClick={() => navigate(-1)} className="h-9 w-9">
                   &lt;
                 </Button>
-                <div className="px-4 text-sm font-semibold capitalize min-w-[140px] text-center">
+                <div className="px-4 text-sm font-semibold capitalize min-w-[140px] text-center text-slate-700 dark:text-slate-200">
                   {headerTitle}
                 </div>
                 <Button variant="ghost" size="icon" onClick={() => navigate(1)} className="h-9 w-9">
@@ -133,19 +133,19 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
       <div className="flex flex-col lg:flex-row gap-6 h-full overflow-hidden">
         
         {/* --- GLAVNI KALENDAR --- */}
-        <Card className="flex-1 flex flex-col overflow-hidden border-gray-200 shadow-sm">
+        <Card className="flex-1 flex flex-col overflow-hidden border-gray-200 dark:border-slate-800 shadow-sm">
             
             {/* DANI HEADER */}
-            <div className={`grid border-b bg-slate-50 ${view === 'radni_tjedan' ? 'grid-cols-5' : 'grid-cols-7'}`}>
+            <div className={`grid border-b border-gray-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 ${view === 'radni_tjedan' ? 'grid-cols-5' : 'grid-cols-7'}`}>
                 {daysToDisplay.slice(0, view === 'radni_tjedan' ? 5 : 7).map((day, i) => (
-                    <div key={i} className="py-3 text-center text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                    <div key={i} className="py-3 text-center text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                         {format(day, 'EEE', { locale: hr })}
                     </div>
                 ))}
             </div>
 
             {/* MREŽA DANA */}
-            <div className={`grid flex-1 auto-rows-fr bg-white ${view === 'radni_tjedan' ? 'grid-cols-5' : 'grid-cols-7'}`}>
+            <div className={`grid flex-1 auto-rows-fr bg-white dark:bg-slate-950 ${view === 'radni_tjedan' ? 'grid-cols-5' : 'grid-cols-7'}`}>
                 {daysToDisplay.map((day, index) => {
                     const dateStr = format(day, 'yyyy-MM-dd');
                     const dailyEvents = rokovi.filter(r => r.datum === dateStr);
@@ -156,14 +156,14 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
                         <div 
                           key={index} 
                           className={`
-                            border-b border-r p-2 relative transition group flex flex-col gap-1.5
-                            ${!isCurrentMonth && view === 'mjesec' ? 'bg-slate-50/50 text-slate-400' : 'bg-white'}
-                            hover:bg-slate-50
+                            border-b border-r border-gray-200 dark:border-slate-800 p-2 relative transition group flex flex-col gap-1.5
+                            ${!isCurrentMonth && view === 'mjesec' ? 'bg-slate-50/50 text-slate-400 dark:bg-slate-900/40 dark:text-slate-500' : 'bg-white dark:bg-slate-950'}
+                            hover:bg-slate-50 dark:hover:bg-slate-900/60
                           `}
                         >
                             {/* Broj dana */}
                             <div className="flex justify-between items-center">
-                                <span className={`text-sm font-medium w-7 h-7 flex items-center justify-center rounded-full ${isTodayDate ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-700'}`}>
+                                <span className={`text-sm font-medium w-7 h-7 flex items-center justify-center rounded-full ${isTodayDate ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-700 dark:text-slate-200'}`}>
                                     {format(day, 'd')}
                                 </span>
                             </div>
@@ -177,8 +177,8 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
                                     className={`
                                       justify-start font-normal text-[10px] px-1.5 py-1 cursor-pointer truncate border
                                       ${ev.vrsta === 'Ročište' 
-                                        ? 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100 hover:border-red-300' 
-                                        : 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 hover:border-blue-300'}
+                                        ? 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100 hover:border-red-300 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800 dark:hover:bg-red-900/50' 
+                                        : 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 hover:border-blue-300 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800 dark:hover:bg-blue-900/50'}
                                     `}
                                   >
                                       <span className="font-bold mr-1.5">{ev.vrijeme?.slice(0,5)}</span>
@@ -194,26 +194,26 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
 
         {/* --- DESNA TRAKA (USKORO) --- */}
         <div className="hidden xl:flex w-80 flex-col gap-4">
-            <Card className="flex-1 border-gray-200 shadow-sm flex flex-col overflow-hidden">
-                <CardHeader className="pb-3 border-b border-gray-100 bg-slate-50/50">
-                    <CardTitle className="text-base font-bold text-slate-800">Nadolazeće</CardTitle>
+            <Card className="flex-1 border-gray-200 dark:border-slate-800 shadow-sm flex flex-col overflow-hidden">
+                <CardHeader className="pb-3 border-b border-gray-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/60">
+                    <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100">Nadolazeće</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0 overflow-y-auto flex-1">
                    {rokovi.length === 0 ? (
-                       <div className="p-6 text-center text-sm text-slate-400">Nema upisanih rokova.</div>
+                       <div className="p-6 text-center text-sm text-slate-400 dark:text-slate-500">Nema upisanih rokova.</div>
                    ) : (
-                       <div className="divide-y divide-gray-100">
+                       <div className="divide-y divide-gray-100 dark:divide-slate-800">
                          {rokovi.slice(0, 10).map(r => ( // Prikazujemo prvih 10
-                             <div key={r.id} className="p-4 hover:bg-slate-50 transition cursor-pointer group">
+                             <div key={r.id} className="p-4 hover:bg-slate-50 dark:hover:bg-slate-900/60 transition cursor-pointer group">
                                 <div className="flex gap-3 items-start">
-                                    <div className="flex flex-col items-center bg-white rounded-lg px-2 py-1 min-w-[50px] border border-gray-200 shadow-sm group-hover:border-blue-300 transition">
-                                        <span className="text-xs font-bold text-slate-400 uppercase">{format(new Date(r.datum), 'MMM', { locale: hr })}</span>
-                                        <span className="text-lg font-bold text-slate-800">{format(new Date(r.datum), 'dd')}</span>
+                                    <div className="flex flex-col items-center bg-white dark:bg-slate-900 rounded-lg px-2 py-1 min-w-[50px] border border-gray-200 dark:border-slate-700 shadow-sm group-hover:border-blue-300 transition">
+                                        <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase">{format(new Date(r.datum), 'MMM', { locale: hr })}</span>
+                                        <span className="text-lg font-bold text-slate-800 dark:text-slate-100">{format(new Date(r.datum), 'dd')}</span>
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-semibold text-slate-800 truncate group-hover:text-blue-700">{r.naslov}</p>
-                                        <p className="text-xs text-slate-500 truncate mb-1.5">{r.predmeti?.naziv || 'Opće'}</p>
-                                        <Badge variant="secondary" className={`text-[10px] h-5 px-1.5 ${r.vrsta === 'Ročište' ? 'bg-red-100 text-red-700 hover:bg-red-100' : 'bg-blue-50 text-blue-700 hover:bg-blue-50'}`}>
+                                        <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-blue-700">{r.naslov}</p>
+                                        <p className="text-xs text-slate-500 dark:text-slate-400 truncate mb-1.5">{r.predmeti?.naziv || 'Opće'}</p>
+                                        <Badge variant="secondary" className={`text-[10px] h-5 px-1.5 ${r.vrsta === 'Ročište' ? 'bg-red-100 text-red-700 hover:bg-red-100 dark:bg-red-900/30 dark:text-red-300' : 'bg-blue-50 text-blue-700 hover:bg-blue-50 dark:bg-blue-900/30 dark:text-blue-300'}`}>
                                             {r.vrsta} • {r.vrijeme?.slice(0,5)}
                                         </Badge>
                                     </div>

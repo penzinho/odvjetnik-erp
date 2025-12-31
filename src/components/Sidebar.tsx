@@ -45,7 +45,7 @@ const linkStyle = (path: string) => {
       {/* GUMB ZA SKUPLJANJE (TOGGLE) */}
       <button 
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className="absolute -right-3 top-9 bg-white border border-gray-200 text-slate-400 hover:text-blue-600 rounded-full p-1 shadow-sm z-50 hover:scale-110 transition-transform"
+        className="absolute -right-3 top-9 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:text-blue-600 rounded-full p-1 shadow-sm dark:shadow-none z-50 hover:scale-110 transition-transform"
       >
         {isCollapsed ? (
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
@@ -55,14 +55,14 @@ const linkStyle = (path: string) => {
       </button>
 
       {/* Logo */}
-      <div className={`h-20 flex items-center border-b border-gray-50 transition-all ${isCollapsed ? 'justify-center px-0' : 'px-8'}`}>
+      <div className={`h-20 flex items-center border-b border-gray-50 dark:border-slate-800 transition-all ${isCollapsed ? 'justify-center px-0' : 'px-8'}`}>
         <div className="flex items-center gap-3">
-          <div className="min-w-[40px] w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-blue-100 shadow-md">
+          <div className="min-w-[40px] w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-blue-100 shadow-md dark:shadow-none">
             L
           </div>
           <div className={textClass}>
-            <h1 className="font-bold text-slate-800 leading-tight">Lex Office</h1>
-            <p className="text-xs text-slate-400">Odvjetničko društvo</p>
+            <h1 className="font-bold text-slate-800 dark:text-slate-100 leading-tight">Lex Office</h1>
+            <p className="text-xs text-slate-400 dark:text-slate-500">Odvjetničko društvo</p>
           </div>
         </div>
       </div>
@@ -94,13 +94,13 @@ const linkStyle = (path: string) => {
         </Link>
 
         {/* SUSTAV SEKCIJA */}
-        <div className="pt-4 mt-4 border-t border-gray-100">
+        <div className="pt-4 mt-4 border-t border-gray-100 dark:border-slate-800">
           {/* Ako je skupljeno, prikaži točkicu umjesto teksta, ili sakrij */}
           <div className={`transition-all duration-300 ${isCollapsed ? 'flex justify-center mb-2' : 'mb-2'}`}>
             {isCollapsed ? (
-               <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+               <span className="w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></span>
             ) : (
-               <p className="px-4 text-xs font-semibold text-slate-400 uppercase tracking-wider whitespace-nowrap">Sustav</p>
+               <p className="px-4 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider whitespace-nowrap">Sustav</p>
             )}
           </div>
           
@@ -118,8 +118,8 @@ const linkStyle = (path: string) => {
       </nav>
 
       {/* Footer Sidebar-a */}
-      <div className={`p-6 border-t border-gray-100 ${isCollapsed ? 'flex justify-center px-2' : ''}`}>
-         <button className={`flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 transition-colors ${isCollapsed ? 'justify-center w-full' : ''}`} title={isCollapsed ? "Odjava" : ""}>
+      <div className={`p-6 border-t border-gray-100 dark:border-slate-800 ${isCollapsed ? 'flex justify-center px-2' : ''}`}>
+         <button className={`flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors ${isCollapsed ? 'justify-center w-full' : ''}`} title={isCollapsed ? "Odjava" : ""}>
            <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
            <span className={textClass}>Odjava</span>
          </button>

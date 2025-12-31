@@ -42,10 +42,6 @@
   --foreground: oklch(0.129 0.042 264.695);
 }
 
-body {
-  background: rgb(245, 247, 250); /* Nježna pozadina za oči */
-}
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -127,5 +123,29 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .surface-card {
+    @apply rounded-2xl border border-gray-100 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900;
+  }
+  .surface-panel {
+    @apply rounded-xl border border-gray-100 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900;
+  }
+  .surface-muted {
+    @apply bg-slate-50/50 dark:bg-slate-900/60;
+  }
+  .surface-input {
+    @apply border border-gray-200 bg-white text-slate-800 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100;
+  }
+  .text-title {
+    @apply text-slate-900 dark:text-slate-100;
+  }
+  .text-muted {
+    @apply text-slate-500 dark:text-slate-400;
+  }
+  .divider {
+    @apply border-gray-100 dark:border-slate-800;
   }
 }
