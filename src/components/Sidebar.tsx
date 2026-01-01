@@ -15,6 +15,16 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
   const [isCollapsed, setIsCollapsed] = useState(false);
   const isToolsActive = pathname === '/alati' || pathname.startsWith('/alati/');
   const [isToolsOpen, setIsToolsOpen] = useState(isToolsActive);
+  const isAddressBookActive =
+    pathname === '/adresar' ||
+    pathname.startsWith('/adresar/') ||
+    pathname === '/klijenti' ||
+    pathname.startsWith('/klijenti/') ||
+    pathname === '/protustranke' ||
+    pathname.startsWith('/protustranke/') ||
+    pathname === '/sudovi' ||
+    pathname.startsWith('/sudovi/');
+  const [isAddressBookOpen, setIsAddressBookOpen] = useState(isAddressBookActive);
   const isCondensed = isCollapsed && !isMobileOpen;
 
   useEffect(() => {
@@ -23,8 +33,17 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
     }
   }, [isToolsActive]);
 
+  useEffect(() => {
+    if (isAddressBookActive) {
+      setIsAddressBookOpen(true);
+    }
+  }, [isAddressBookActive]);
+
   // Funkcija koja provjerava je li link aktivan
   const isActive = (path: string) => {
+    if (path === '/adresar') {
+      return isAddressBookActive;
+    }
     return pathname === path || pathname.startsWith(`${path}/`);
   };
 
@@ -36,7 +55,7 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
     
     // Ako je skupljeno: centriraj i manji padding. Ako nije: normalan padding.
     const layoutClass = isCondensed
-      ? "px-4 md:justify-center md:px-2"
+      ? "px-4 md:justify-center md:px-2 md:gap-0"
       : "px-4";
 
     return `flex items-center gap-3 py-3 rounded-xl font-medium transition-all duration-200 group relative ${activeClass} ${layoutClass}`;
@@ -77,8 +96,8 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
       </button>
 
       {/* Logo */}
-      <div className={`h-16 sm:h-20 flex items-center border-b border-gray-50 dark:border-slate-800 transition-all ${isCondensed ? 'justify-center px-0' : 'px-6 sm:px-8'} ${isCondensed ? '' : 'justify-between'}`}>
-        <div className="flex items-center gap-3">
+      <div className={`app-header flex items-center border-b border-gray-50 dark:border-slate-800 transition-all ${isCondensed ? 'justify-center px-0' : 'px-6 sm:px-8'} ${isCondensed ? '' : 'justify-between'}`}>
+        <div className={`flex items-center ${isCondensed ? "gap-0" : "gap-3"}`}>
           <div className="min-w-[40px] w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-blue-100 shadow-md dark:shadow-none">
             L
           </div>
@@ -134,14 +153,16 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
         >
           <svg className="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.7 6.3a1 1 0 01-1.4 0l-2.6-2.6a1 1 0 00-1.4 0l-2.3 2.3a1 1 0 000 1.4l2.6 2.6a1 1 0 010 1.4l-2.6 2.6a1 1 0 000 1.4l2.3 2.3a1 1 0 001.4 0l2.6-2.6a1 1 0 011.4 0l2.6 2.6a1 1 0 001.4 0l2.3-2.3a1 1 0 000-1.4l-2.6-2.6a1 1 0 010-1.4l2.6-2.6a1 1 0 000-1.4l-2.3-2.3a1 1 0 00-1.4 0l-2.6 2.6z"></path></svg>
           <span className={textClass}>Alati</span>
-          <svg
-            className={`ml-auto h-4 w-4 transition-transform ${isCondensed ? "opacity-0 w-0" : "opacity-100"} ${isToolsOpen ? "rotate-90" : ""}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-          </svg>
+          {!isCondensed ? (
+            <svg
+              className={`ml-auto h-4 w-4 transition-transform ${isToolsOpen ? "rotate-90" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          ) : null}
         </button>
         {isToolsOpen && !isCondensed ? (
           <div id="sidebar-tools" className="ml-6 space-y-1">
@@ -163,10 +184,43 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
             )}
           </div>
           
-          <Link href="/adresar" className={linkStyle('/adresar')} title={isCondensed ? "Adresar" : ""} onClick={onMobileClose}>
+          <button
+            type="button"
+            onClick={() => setIsAddressBookOpen((open) => !open)}
+            className={`w-full ${linkStyle('/adresar')}`}
+            title={isCondensed ? "Adresar" : ""}
+            aria-expanded={isAddressBookOpen}
+            aria-controls="sidebar-adresar"
+          >
             <svg className="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
             <span className={textClass}>Adresar</span>
-          </Link>
+            {!isCondensed ? (
+              <svg
+                className={`ml-auto h-4 w-4 transition-transform ${isAddressBookOpen ? "rotate-90" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            ) : null}
+          </button>
+          {isAddressBookOpen && !isCondensed ? (
+            <div id="sidebar-adresar" className="ml-6 space-y-1">
+              <Link href="/klijenti" className={subLinkStyle('/klijenti')} onClick={onMobileClose}>
+                <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                <span>Klijenti</span>
+              </Link>
+              <Link href="/protustranke" className={subLinkStyle('/protustranke')} onClick={onMobileClose}>
+                <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 14a4 4 0 10-8 0m8 0v1a3 3 0 01-3 3H7a3 3 0 01-3-3v-1m16 0v1a7 7 0 01-7 7H9a7 7 0 01-7-7v-1m10-8a4 4 0 11-8 0 4 4 0 018 0zm10 3l-4 4m0 0l-4-4m4 4V7"></path></svg>
+                <span>Protustranke</span>
+              </Link>
+              <Link href="/sudovi" className={subLinkStyle('/sudovi')} onClick={onMobileClose}>
+                <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 10h.01M12 10h.01M15 10h.01"></path></svg>
+                <span>Sudovi</span>
+              </Link>
+            </div>
+          ) : null}
           
           <Link href="/postavke" className={linkStyle('/postavke')} title={isCondensed ? "Postavke" : ""} onClick={onMobileClose}>
              <svg className="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -178,7 +232,7 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
 
       {/* Footer Sidebar-a */}
       <div className={`p-6 border-t border-gray-100 dark:border-slate-800 ${isCondensed ? 'flex justify-center px-2' : ''}`}>
-         <button className={`flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors ${isCondensed ? 'justify-center w-full' : ''}`} title={isCondensed ? "Odjava" : ""}>
+         <button className={`flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors ${isCondensed ? 'justify-center w-full gap-0' : ''}`} title={isCondensed ? "Odjava" : ""}>
            <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
            <span className={textClass}>Odjava</span>
          </button>

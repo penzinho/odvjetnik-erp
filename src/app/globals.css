@@ -139,6 +139,14 @@
   .surface-input {
     @apply border border-gray-200 bg-white text-slate-800 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100;
   }
+  .app-header {
+    height: 4rem;
+  }
+  @media (min-width: 640px) {
+    .app-header {
+      height: 5rem;
+    }
+  }
   .text-title {
     @apply text-slate-900 dark:text-slate-100;
   }
