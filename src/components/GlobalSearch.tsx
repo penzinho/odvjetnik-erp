@@ -43,59 +43,66 @@ export default function GlobalSearch() {
       setLoading(true);
       setIsOpen(true);
 
-      // --- KLJUČNA PROMJENA OVDJE ---
-      // Koristimo .or() sintaksu za pretragu više stupaca odjednom
-      const [klijentiRes, predmetiRes, racuniRes] = await Promise.all([
+      const [klijentiRes, predmetiRes, racuniPoBrojuRes, racuniPoKlijentuRes] = await Promise.all([
         supabase
           .from('klijenti')
           .select('id, naziv, oib, adresa')
-          // Traži u nazivu ILI oib-u ILI adresi
           .or(`naziv.ilike.%${query}%,oib.ilike.%${query}%,adresa.ilike.%${query}%`)
           .limit(3),
         
         supabase.from('predmeti').select('id, naziv, broj_spisa, klijent_id').ilike('naziv', `%${query}%`).limit(3),
+        
         supabase.from('racuni').select('id, broj_racuna, klijenti(naziv)').ilike('broj_racuna', `%${query}%`).limit(3),
+
+        supabase.from('racuni').select('id, broj_racuna, klijenti!inner(naziv)').ilike('klijenti.naziv', `%${query}%`).limit(3),
       ]);
 
       const noviRezultati: SearchResult[] = [];
 
+      // --- 1. KLIJENTI ---
       klijentiRes.data?.forEach((k: any) => {
-        // Pametni podnaslov: Pokaži ono što je korisnik tražio
         let subtitle = '';
-        if (k.oib && k.oib.includes(query)) {
-            subtitle = `OIB: ${k.oib}`;
-        } else if (k.adresa && k.adresa.toLowerCase().includes(query.toLowerCase())) {
-            subtitle = k.adresa;
-        } else {
-            subtitle = k.oib ? `OIB: ${k.oib}` : 'Nema OIB';
-        }
+        if (k.oib && k.oib.includes(query)) subtitle = `OIB: ${k.oib}`;
+        else if (k.adresa && k.adresa.toLowerCase().includes(query.toLowerCase())) subtitle = k.adresa;
+        else subtitle = k.oib ? `OIB: ${k.oib}` : 'Nema OIB';
 
         noviRezultati.push({
           id: k.id,
           type: 'klijent',
           title: k.naziv,
           subtitle: subtitle,
-          link: `/klijenti` 
+          // LINK NA DETALJE KLIJENTA
+          link: `/klijenti/${k.id}` 
         });
       });
 
+      // --- 2. PREDMETI ---
       predmetiRes.data?.forEach((p: any) => {
         noviRezultati.push({
           id: p.id,
           type: 'predmet',
           title: p.naziv,
           subtitle: `Spis: ${p.klijent_id}-${p.broj_spisa}`,
+          // LINK NA DETALJE PREDMETA
           link: `/predmeti/${p.id}`
         });
       });
 
-      racuniRes.data?.forEach((r: any) => {
+      // --- 3. RAČUNI ---
+      const sviRacuni = [...(racuniPoBrojuRes.data || []), ...(racuniPoKlijentuRes.data || [])];
+      const jedinstveniRacuni = Array.from(new Map(sviRacuni.map(item => [item.id, item])).values()).slice(0, 3);
+
+      jedinstveniRacuni.forEach((r: any) => {
+        const klijentNaziv = r.klijenti?.naziv || '';
+        const matchFoundInClient = klijentNaziv.toLowerCase().includes(query.toLowerCase());
+
         noviRezultati.push({
           id: r.id,
           type: 'racun',
           title: `Račun #${r.broj_racuna}`,
-          subtitle: r.klijenti?.naziv || '',
-          link: `/financije`
+          subtitle: matchFoundInClient ? `Klijent: ${klijentNaziv}` : klijentNaziv,
+          // LINK NA DETALJE RAČUNA (ili financije)
+          link: `/financije/racuni/${r.id}`
         });
       });
 
@@ -109,11 +116,13 @@ export default function GlobalSearch() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       setIsOpen(false);
+      // Samo preusmjeri na stranicu pretrage, ona će sama izlistati rezultate koji su također linkani
       router.push(`/pretraga?q=${encodeURIComponent(query)}`);
     }
   };
 
   const handleClickResult = (link: string) => {
+    // Ovdje se događa navigacija na točan URL iz objekta
     router.push(link);
     setIsOpen(false);
     setQuery("");
@@ -124,8 +133,8 @@ export default function GlobalSearch() {
       <div className="relative group">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
         <Input
-          placeholder="Pretraži (Ime, OIB, Adresa...)" // Ažuriran placeholder
-          className="pl-10 h-10 bg-slate-100 border-transparent dark:bg-slate-800/50 focus-visible:bg-white dark:focus-visible:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500 transition-all rounded-xl"
+          placeholder="Pretraži (Ime, OIB, Adresa...)"
+          className="pl-10 h-10 bg-slate-100 border-transparent dark:bg-slate-800/50 focus-visible:bg-white dark:focus-visible:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500 transition-all rounded-xl text-slate-900 dark:text-slate-100 placeholder:text-slate-500"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -146,7 +155,7 @@ export default function GlobalSearch() {
             {results.map((res) => (
               <div 
                 key={`${res.type}-${res.id}`}
-                onClick={() => handleClickResult(res.link)}
+                onClick={() => handleClickResult(res.link)} // <--- KLIK OTVARA DETALJE
                 className="px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/80 cursor-pointer flex items-center gap-3 transition-colors group border-l-2 border-transparent hover:border-blue-500"
               >
                 <div className={`p-2 rounded-lg flex items-center justify-center shrink-0 shadow-sm
@@ -164,7 +173,7 @@ export default function GlobalSearch() {
                     {res.title}
                   </p>
                   <div className="flex items-center gap-2 mt-0.5">
-                     <Badge variant="secondary" className="text-[9px] h-4 px-1 py-0 rounded text-slate-500 uppercase tracking-wide">
+                     <Badge variant="secondary" className="text-[9px] h-4 px-1 py-0 rounded text-slate-500 uppercase tracking-wide bg-slate-100 dark:bg-slate-800 border-none">
                         {res.type}
                      </Badge>
                      <p className="text-xs text-slate-400 truncate">
