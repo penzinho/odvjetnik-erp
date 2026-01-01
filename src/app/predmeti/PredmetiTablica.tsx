@@ -52,7 +52,7 @@ export default function PredmetiTablica({ predmeti }: { predmeti: Predmet[] }) {
       
       {/* HEADER I PRETRAGA */}
       <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between">
-        <div className="relative flex-1 max-w-sm">
+        <div className="relative flex-1 w-full md:max-w-sm">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Traži po strankama, broju spisa..."
@@ -61,7 +61,7 @@ export default function PredmetiTablica({ predmeti }: { predmeti: Predmet[] }) {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <Button asChild className="bg-blue-600 hover:bg-blue-700">
+        <Button asChild className="w-full md:w-auto bg-blue-600 hover:bg-blue-700">
           <Link href="/predmeti/novi">+ Novi Predmet</Link>
         </Button>
       </div>
@@ -75,7 +75,8 @@ export default function PredmetiTablica({ predmeti }: { predmeti: Predmet[] }) {
           </CardDescription>
         </CardHeader>
         <CardContent className="p-0">
-          <Table>
+          <div className="w-full overflow-x-auto">
+            <Table className="min-w-[900px]">
             <TableHeader className="bg-slate-50 dark:bg-slate-900/60">
               <TableRow>
                 <TableHead className="w-[100px]">Broj</TableHead>
@@ -160,6 +161,7 @@ export default function PredmetiTablica({ predmeti }: { predmeti: Predmet[] }) {
               )}
             </TableBody>
           </Table>
+          </div>
         </CardContent>
       </Card>
     </div>
