@@ -212,6 +212,12 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
               <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 8h10M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01"></path></svg>
               <span>Kalkulator</span>
             </Link>
+            <Link href="/alati/statistika" className={subLinkStyle('/alati/statistika')} onClick={onMobileClose}>
+              <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3v18h18M7 16v-4m4 4V8m4 8v-6m4 6v-10" />
+              </svg>
+              <span>Statistika</span>
+            </Link>
           </div>
         ) : null}
 
