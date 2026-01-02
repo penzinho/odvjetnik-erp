@@ -6,6 +6,13 @@ Ovaj dokument opisuje funkcionalnosti koje su trenutno implementirane u aplikaci
 - App shell s fiksnim headerom, globalnom pretragom i responsivnim sidebarom (sklapanje i mobilna navigacija).
 - Prikaz korisnickog profila u zaglavlju.
 
+## Autentikacija i pristup
+- Prijava korisnika putem emaila i lozinke.
+- Registracija novog korisnika uz provjeru lozinke (min. 8 znakova, veliko slovo, posebni znak) i potvrdu lozinke na klijentu.
+- Automatsko spremanje osnovnih podataka korisnika (ime i prezime) u profil nakon registracije.
+- Odjava korisnika.
+- Zastita ruta: neautentificirani korisnici se preusmjeravaju na login, a prijavljeni se ne mogu vratiti na login/register.
+
 ## Pregled (Dashboard)
 - Pregledna pocetna stranica s aktualnim dogadajima iz rokovnika za iduca 4 dana.
 - Panel "Dospijeva danas" s rokovima i rocistima koji padaju na danasnji datum.
