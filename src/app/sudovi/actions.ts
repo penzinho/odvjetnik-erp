@@ -16,14 +16,18 @@ export async function saveSud(formData: FormData) {
   const supabase = await createClient()
   
   const id = formData.get('id') as string
+  const postanskiBroj = (formData.get('postanski_broj') as string) || ''
   const sud = {
     naziv: formData.get('naziv') as string,
     adresa: formData.get('adresa') as string,
-    postanski_broj: formData.get('postanski_broj') as string,
+    postanski_broj: postanskiBroj,
     grad: formData.get('grad') as string,
   }
 
-  console.log("--- POKUŠAJ SPREMANJA ---", sud); // <--- DEBUG
+  if (postanskiBroj && !/^\d{5}$/.test(postanskiBroj)) {
+    console.error("Neispravan poštanski broj:", postanskiBroj);
+    return { error: 'Poštanski broj mora imati 5 znamenaka.' };
+  }
 
   let error;
 
@@ -38,12 +42,10 @@ export async function saveSud(formData: FormData) {
   }
 
   if (error) {
-    console.error("❌ GREŠKA KOD SPREMANJA:", error.message); // <--- OVO ĆE TI PISATI U TERMINALU
-    // Ovdje bi idealno vratili grešku nazad na formu, ali za debug je dovoljan log
+    console.error("Greška kod spremanja:", error.message);
     return { error: error.message }; 
   }
 
-  console.log("✅ USPJEŠNO SPREMLJENO!");
   revalidatePath('/sudovi')
   redirect('/sudovi')
 }

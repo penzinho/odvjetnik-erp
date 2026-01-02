@@ -23,6 +23,8 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
     pathname.startsWith('/klijenti/') ||
     pathname === '/protustranke' ||
     pathname.startsWith('/protustranke/') ||
+    pathname === '/biljeznici' ||
+    pathname.startsWith('/biljeznici/') ||
     pathname === '/sudovi' ||
     pathname.startsWith('/sudovi/');
   const [isAddressBookOpen, setIsAddressBookOpen] = useState(isAddressBookActive);
@@ -161,6 +163,10 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
             <Link href="/protustranke" className={subLinkStyle('/protustranke')} onClick={onMobileClose}>
               <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 14a4 4 0 10-8 0m8 0v1a3 3 0 01-3 3H7a3 3 0 01-3-3v-1m16 0v1a7 7 0 01-7 7H9a7 7 0 01-7-7v-1m10-8a4 4 0 11-8 0 4 4 0 018 0zm10 3l-4 4m0 0l-4-4m4 4V7"></path></svg>
               <span>Protustranke</span>
+            </Link>
+            <Link href="/biljeznici" className={subLinkStyle('/biljeznici')} onClick={onMobileClose}>
+              <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5l5 5v11a2 2 0 01-2 2z"></path></svg>
+              <span>Javni bilježnici</span>
             </Link>
             <Link href="/sudovi" className={subLinkStyle('/sudovi')} onClick={onMobileClose}>
               <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 10h.01M12 10h.01M15 10h.01"></path></svg>

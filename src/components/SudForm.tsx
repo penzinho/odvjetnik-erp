@@ -45,8 +45,13 @@ export default function SudForm({ initialData }: { initialData?: any }) {
           <div className="grid grid-cols-2 gap-4">
              <div className="space-y-2">
                 <Label htmlFor="postanski_broj">Poštanski broj</Label>
-                <Input 
+             <Input 
                     id="postanski_broj" name="postanski_broj" placeholder="10000" 
+                    inputMode="numeric"
+                    pattern="[0-9]{5}"
+                    minLength={5}
+                    maxLength={5}
+                    title="Poštanski broj mora imati 5 znamenaka."
                     defaultValue={initialData?.postanski_broj} 
                 />
              </div>
