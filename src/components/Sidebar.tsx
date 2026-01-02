@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react'; // Dodali smo useState
+import { useEffect, useState } from 'react';
+import { logout } from '@/app/login/actions'; // <--- 1. UVOZ LOGOUT AKCIJE
 
 type SidebarProps = {
   isMobileOpen?: boolean;
@@ -76,7 +77,6 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
 
   return (
     
-    
     <aside 
       className={`bg-white flex flex-col border-r border-gray-200 h-screen transition-all duration-300 dark:bg-slate-900 dark:border-slate-800 fixed inset-y-0 left-0 z-40 md:sticky md:top-0 md:translate-x-0 ${
         isMobileOpen ? "translate-x-0" : "-translate-x-full"
@@ -130,10 +130,44 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
           <span className={textClass}>Rokovnik</span>
         </Link>
         
-        <Link href="/klijenti" className={linkStyle('/klijenti')} title={isCondensed ? "Klijenti" : ""} onClick={onMobileClose}>
-          <svg className="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-          <span className={textClass}>Klijenti</span>
-        </Link>
+        {/* Adresar s podizbornicima */}
+        <button
+          type="button"
+          onClick={() => setIsAddressBookOpen((open) => !open)}
+          className={`w-full ${linkStyle('/adresar')}`}
+          title={isCondensed ? "Adresar" : ""}
+          aria-expanded={isAddressBookOpen}
+          aria-controls="sidebar-adresar"
+        >
+          <svg className="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+          <span className={textClass}>Adresar</span>
+          {!isCondensed ? (
+            <svg
+              className={`ml-auto h-4 w-4 transition-transform ${isAddressBookOpen ? "rotate-90" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          ) : null}
+        </button>
+        {isAddressBookOpen && !isCondensed ? (
+          <div id="sidebar-adresar" className="ml-6 space-y-1">
+            <Link href="/klijenti" className={subLinkStyle('/klijenti')} onClick={onMobileClose}>
+              <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+              <span>Klijenti</span>
+            </Link>
+            <Link href="/protustranke" className={subLinkStyle('/protustranke')} onClick={onMobileClose}>
+              <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 14a4 4 0 10-8 0m8 0v1a3 3 0 01-3 3H7a3 3 0 01-3-3v-1m16 0v1a7 7 0 01-7 7H9a7 7 0 01-7-7v-1m10-8a4 4 0 11-8 0 4 4 0 018 0zm10 3l-4 4m0 0l-4-4m4 4V7"></path></svg>
+              <span>Protustranke</span>
+            </Link>
+            <Link href="/sudovi" className={subLinkStyle('/sudovi')} onClick={onMobileClose}>
+              <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 10h.01M12 10h.01M15 10h.01"></path></svg>
+              <span>Sudovi</span>
+            </Link>
+          </div>
+        ) : null}
 
         <Link href="/predmeti" className={linkStyle('/predmeti')} title={isCondensed ? "Predmeti" : ""} onClick={onMobileClose}>
           <svg className="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"></path></svg>
@@ -143,6 +177,8 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
           <svg className="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           <span className={textClass}>Financije</span>
         </Link>
+        
+        {/* ALATI */}
         <button
           type="button"
           onClick={() => setIsToolsOpen((open) => !open)}
@@ -175,7 +211,6 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
 
         {/* SUSTAV SEKCIJA */}
         <div className="pt-4 mt-4 border-t border-gray-100 dark:border-slate-800">
-          {/* Ako je skupljeno, prikaži točkicu umjesto teksta, ili sakrij */}
           <div className={`transition-all duration-300 ${isCondensed ? 'flex justify-center mb-2' : 'mb-2'}`}>
             {isCondensed ? (
                <span className="w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></span>
@@ -183,44 +218,6 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
                <p className="px-4 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider whitespace-nowrap">Sustav</p>
             )}
           </div>
-          
-          <button
-            type="button"
-            onClick={() => setIsAddressBookOpen((open) => !open)}
-            className={`w-full ${linkStyle('/adresar')}`}
-            title={isCondensed ? "Adresar" : ""}
-            aria-expanded={isAddressBookOpen}
-            aria-controls="sidebar-adresar"
-          >
-            <svg className="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-            <span className={textClass}>Adresar</span>
-            {!isCondensed ? (
-              <svg
-                className={`ml-auto h-4 w-4 transition-transform ${isAddressBookOpen ? "rotate-90" : ""}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            ) : null}
-          </button>
-          {isAddressBookOpen && !isCondensed ? (
-            <div id="sidebar-adresar" className="ml-6 space-y-1">
-              <Link href="/klijenti" className={subLinkStyle('/klijenti')} onClick={onMobileClose}>
-                <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                <span>Klijenti</span>
-              </Link>
-              <Link href="/protustranke" className={subLinkStyle('/protustranke')} onClick={onMobileClose}>
-                <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 14a4 4 0 10-8 0m8 0v1a3 3 0 01-3 3H7a3 3 0 01-3-3v-1m16 0v1a7 7 0 01-7 7H9a7 7 0 01-7-7v-1m10-8a4 4 0 11-8 0 4 4 0 018 0zm10 3l-4 4m0 0l-4-4m4 4V7"></path></svg>
-                <span>Protustranke</span>
-              </Link>
-              <Link href="/sudovi" className={subLinkStyle('/sudovi')} onClick={onMobileClose}>
-                <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 10h.01M12 10h.01M15 10h.01"></path></svg>
-                <span>Sudovi</span>
-              </Link>
-            </div>
-          ) : null}
           
           <Link href="/postavke" className={linkStyle('/postavke')} title={isCondensed ? "Postavke" : ""} onClick={onMobileClose}>
              <svg className="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -232,8 +229,13 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
 
       {/* Footer Sidebar-a */}
       <div className={`p-6 border-t border-gray-100 dark:border-slate-800 ${isCondensed ? 'flex justify-center px-2' : ''}`}>
-         <button className={`flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors ${isCondensed ? 'justify-center w-full gap-0' : ''}`} title={isCondensed ? "Odjava" : ""}>
-           <svg className="w-4 h-4 min-w-[16px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+         {/* GUMB ZA ODJAVU S AKCIJOM */}
+         <button 
+           onClick={() => logout()} // <--- 2. POZIVANJE AKCIJE
+           className={`${linkStyle('/logout')} cursor-pointer`}
+           title={isCondensed ? "Odjava" : ""}
+         >
+           <svg className="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
            <span className={textClass}>Odjava</span>
          </button>
       </div>

@@ -1,36 +1,56 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import AppShell from "@/components/AppShell";
 import { ThemeProvider } from "@/components/theme-provider"; 
+import AppShell from "@/components/AppShell";
+import { createClient } from "@/utils/supabase/server"; // <--- SERVER CLIENT
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ERP Odvjetničko Društvo",
-  description: "Sustav za upravljanje predmetima",
+  title: "Lex Office",
+  description: "Odvjetnički ERP Sustav",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+  // 1. DOHVAT KORISNIKA NA SERVERU
+  const supabase = await createClient();
+  
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  let userProfile = null;
+
+  if (user) {
+    // Ako je logiran, dohvati detalje profila (ime, prezime, role)
+    const { data } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .single();
+      
+    userProfile = data;
+  }
+
   return (
-    // 'suppressHydrationWarning' je obavezan kad koristimo next-themes da se izbjegne greška u konzoli
     <html lang="hr" suppressHydrationWarning>
-      <body className={`${inter.className} bg-gray-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-300`}>
-        
-        {/* OVDJE SMO AKTIVIRALI THEME PROVIDER */}
+      <body className={inter.className}>
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
         >
-          <AppShell>{children}</AppShell>
+          {/* 2. ŠALJEMO PODATKE U APP SHELL */}
+          <AppShell userProfile={userProfile}>
+            {children}
+          </AppShell>
+          
         </ThemeProvider>
-
       </body>
     </html>
   );
