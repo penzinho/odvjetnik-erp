@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabase';
 import PageHeader from '@/components/PageHeader'; 
-import DashboardCalendar from '@/components/dashboard/DashboardCalendar';
-import TodayTasks from '@/components/dashboard/TodayTasks';
+import { DashboardCalendar } from '@/components/dashboard/DashboardCalendar';
+import { TodayTasks } from '@/components/dashboard/TodayTasks';
 import RecentCases from '@/components/dashboard/RecentCases';
 import StatsCard from '@/components/dashboard/StatsCard';
 

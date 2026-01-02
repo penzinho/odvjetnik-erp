@@ -23,6 +23,7 @@ import { hr } from 'date-fns/locale'; // Hrvatski jezik za datume
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { EventDialog } from '@/components/dashboard/EventDialog';
 import {
   Select,
   SelectContent,
@@ -47,6 +48,7 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
   const [view, setView] = useState<ViewType>('mjesec');
   // Postavljamo datum na veljaču 2024 jer su tamo testni podaci
   const [currentDate, setCurrentDate] = useState(new Date(2024, 1, 1));
+  const [selectedEvent, setSelectedEvent] = useState<Rok | null>(null);
 
   // --- LOGIKA DATUMA (date-fns) ---
   
@@ -180,6 +182,7 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
                                         ? 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100 hover:border-red-300 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800 dark:hover:bg-red-900/50' 
                                         : 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 hover:border-blue-300 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800 dark:hover:bg-blue-900/50'}
                                     `}
+                                    onClick={() => setSelectedEvent(ev)}
                                   >
                                       <span className="font-bold mr-1.5">{ev.vrijeme?.slice(0,5)}</span>
                                       <span className="truncate">{ev.naslov}</span>
@@ -204,7 +207,11 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
                    ) : (
                        <div className="divide-y divide-gray-100 dark:divide-slate-800">
                          {rokovi.slice(0, 10).map(r => ( // Prikazujemo prvih 10
-                             <div key={r.id} className="p-4 hover:bg-slate-50 dark:hover:bg-slate-900/60 transition cursor-pointer group">
+                             <div
+                                key={r.id}
+                                onClick={() => setSelectedEvent(r)}
+                                className="p-4 hover:bg-slate-50 dark:hover:bg-slate-900/60 transition cursor-pointer group"
+                             >
                                 <div className="flex gap-3 items-start">
                                     <div className="flex flex-col items-center bg-white dark:bg-slate-900 rounded-lg px-2 py-1 min-w-[50px] border border-gray-200 dark:border-slate-700 shadow-sm group-hover:border-blue-300 transition">
                                         <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase">{format(new Date(r.datum), 'MMM', { locale: hr })}</span>
@@ -227,6 +234,12 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
         </div>
 
       </div>
+
+      <EventDialog
+        event={selectedEvent}
+        isOpen={!!selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+      />
     </div>
   );
 }
