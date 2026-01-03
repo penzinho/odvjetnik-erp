@@ -52,7 +52,7 @@ export default async function DashboardPage() {
         {/* LIJEVI STUPAC (2/3 širine) */}
         <div className="lg:col-span-2 space-y-6">
            
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[400px]">
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:h-[400px]">
               <DashboardCalendar events={sviRokovi} />
               <TodayTasks tasks={zadaciDanas} />
            </div>

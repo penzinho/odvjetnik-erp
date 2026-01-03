@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Sidebar from '@/components/Sidebar';
 import AppHeader from '@/components/AppHeader';
@@ -24,6 +24,10 @@ export default function AppShell({ children, userProfile }: AppShellProps) {
   const pathname = usePathname();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const isPublicPage = pathname === '/login' || pathname === '/register';
+
+  useEffect(() => {
+    setIsMobileNavOpen(false);
+  }, [pathname]);
 
   // Ako je login stranica, ne prikazuj shell
   if (isPublicPage) {
