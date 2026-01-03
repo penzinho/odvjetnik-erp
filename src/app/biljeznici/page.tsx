@@ -23,7 +23,7 @@ export default async function BiljezniciPage() {
         subtitle="Pregled i upravljanje svim javnim bilježnicima u sustavu."
         extra={
           <Link href="/biljeznici/novi">
-            <Button className="gap-2 bg-blue-600 hover:bg-blue-700">
+            <Button className="gap-2 bg-blue-600 text-white hover:bg-blue-700">
               <Plus className="h-4 w-4" /> Dodaj Novog Bilježnika
             </Button>
           </Link>

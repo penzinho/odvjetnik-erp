@@ -61,7 +61,7 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
       ? "px-4 md:justify-center md:px-2 md:gap-0"
       : "px-4";
 
-    return `flex items-center gap-3 py-3 rounded-xl font-medium transition-all duration-200 group relative ${activeClass} ${layoutClass}`;
+    return `flex items-center gap-3 py-3 rounded-xl font-medium transition-all duration-200 group relative cursor-pointer ${activeClass} ${layoutClass}`;
   };
 
   const subLinkStyle = (path: string) => {
@@ -69,7 +69,7 @@ export default function Sidebar({ isMobileOpen = false, onMobileClose }: Sidebar
       ? "bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400"
       : "text-slate-500 hover:bg-gray-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200";
 
-    return `flex items-center gap-3 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 ${activeClass}`;
+    return `flex items-center gap-3 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${activeClass}`;
   };
 
   // Klasa za skrivanje teksta s animacijom

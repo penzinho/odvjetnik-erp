@@ -124,7 +124,7 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
                 </Button>
             </div>
             
-            <Button asChild className="bg-blue-600 hover:bg-blue-700">
+            <Button asChild className="bg-blue-600 text-white hover:bg-blue-700">
                <Link href="/rokovnik/novi">
                  + Novi Rok
                </Link>

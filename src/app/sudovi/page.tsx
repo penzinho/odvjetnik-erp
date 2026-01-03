@@ -26,7 +26,7 @@ export default async function SudoviPage() {
         subtitle="Pregled i upravljanje svim sudovima u sustavu."
         extra={
             <Link href="/sudovi/novi">
-                <Button className="gap-2 bg-blue-600 hover:bg-blue-700">
+                <Button className="gap-2 bg-blue-600 text-white hover:bg-blue-700">
                     <Plus className="h-4 w-4" /> Dodaj Novi Sud
                 </Button>
             </Link>
