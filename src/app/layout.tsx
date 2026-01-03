@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"; 
 import AppShell from "@/components/AppShell";
 import { createClient } from "@/utils/supabase/server"; // <--- SERVER CLIENT
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,7 +50,7 @@ export default async function RootLayout({
           <AppShell userProfile={userProfile}>
             {children}
           </AppShell>
-          
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
