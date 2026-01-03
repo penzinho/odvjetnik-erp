@@ -18,6 +18,7 @@ Ovaj dokument opisuje funkcionalnosti koje su trenutno implementirane u aplikaci
 - Panel "Dospijeva danas" s rokovima i rocistima koji padaju na danasnji datum.
 - Lista nedavnih predmeta (zadnjih 5) s brzim linkom na detalje.
 - Statisticki prikaz "Ovaj mjesec" s brojacima i grafom (trenutno staticki/placeholder).
+- Klik na dogadaj u agendi ili danasnjim rokovima otvara detalje i uredjivanje u modalu.
 
 ## Pretraga
 - Globalna pretraga u headeru s prijedlozima za klijente, predmete i racune.
@@ -28,6 +29,18 @@ Ovaj dokument opisuje funkcionalnosti koje su trenutno implementirane u aplikaci
 - Prikaz osnovnih podataka (kontakt, vrsta klijenta, status).
 - Kreiranje novog klijenta (fizicka/pravna osoba) s automatskom numeracijom ID-a.
 - Unos adrese, grada, drzave, kontakt podataka i IBAN-a.
+- Detaljan prikaz klijenta s tabovima Info, Predmeti i Racuni.
+
+## Javni biljeznici
+- Popis biljeznika s pretragom (naziv, grad, email, telefon) i filtriranjem po gradu.
+- Dodavanje i uredjivanje biljeznika kroz formu (naziv, adresa, postanski broj, grad, kontakt).
+- Brisanje biljeznika uz potvrdu.
+- Brzi link za slanje e-maila (ako je adresa unesena).
+
+## Sudovi
+- Popis sudova s pretragom i filtriranjem po gradu.
+- Dodavanje i uredjivanje sudova kroz formu (naziv, adresa, postanski broj, grad).
+- Brisanje suda uz potvrdu.
 
 ## Predmeti
 - Popis predmeta s filtriranjem po nazivu, klijentu, broju spisa i poslovnom broju.
@@ -41,6 +54,8 @@ Ovaj dokument opisuje funkcionalnosti koje su trenutno implementirane u aplikaci
 - Kalendar s pogledom mjesec/tjedan/radni tjedan i navigacijom kroz razdoblja.
 - Prikaz dogadaja na kalendaru i lista nadolazecih obaveza.
 - Unos novog roka/rocista/sastanka uz povezivanje s predmetom, datum, vrijeme, mjesto i napomenu.
+- Uredjivanje postojeceg unosa rokovnika (naslov, opis, datum, vrijeme) uz osvjezavanje prikaza.
+- Detaljni pregled dogadaja u modalu iz kalendara i liste nadolazecih dogadaja.
 
 ## Financije
 - Dashboard sa sumama: naplaceno, otvoreno potrazivanje i dospjelo (kasnjenje).
@@ -51,6 +66,7 @@ Ovaj dokument opisuje funkcionalnosti koje su trenutno implementirane u aplikaci
 
 ## Alati
 - Kalkulator naknada: odabir postupka i akcije (parnica: tuzba/podnesak) uz izracun neto, PDV i ukupno.
+- Statistika: broj aktivnih predmeta, broj stranaka i predmeti otvoreni u tekucoj godini (racuni su placeholder).
 - Podrska za unos vrijednosti spora ili kazne (kazneno - UI).
 
 ## Postavke
