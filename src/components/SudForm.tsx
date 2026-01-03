@@ -65,11 +65,15 @@ export default function SudForm({ initialData }: { initialData?: any }) {
           </div>
 
         </CardContent>
-        <CardFooter className="flex justify-between border-t bg-gray-50 dark:bg-slate-900/50 p-4">
-            <Button variant="ghost" type="button" onClick={() => router.back()}>
+        <CardFooter className="flex justify-end gap-3 border-t bg-gray-50 dark:bg-slate-900/50 p-4">
+            <Button
+                type="button"
+                onClick={() => router.back()}
+                className="bg-red-100 text-red-700 hover:bg-red-200"
+            >
                 Odustani
             </Button>
-            <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={loading}>
+            <Button type="submit" className="bg-blue-600 text-white hover:bg-blue-700" disabled={loading}>
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {initialData ? 'Spremi Promjene' : 'Dodaj Sud'}
             </Button>

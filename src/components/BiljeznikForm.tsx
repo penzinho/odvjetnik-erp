@@ -101,7 +101,7 @@ export default function BiljeznikForm({ initialData }: { initialData?: any }) {
           >
             Odustani
           </Button>
-          <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={loading}>
+          <Button type="submit" className="bg-blue-600 text-white hover:bg-blue-700" disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {initialData ? 'Spremi Promjene' : 'Dodaj Bilježnika'}
           </Button>

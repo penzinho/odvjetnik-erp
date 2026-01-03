@@ -66,7 +66,7 @@ export default function KlijentiTablica({ klijenti }: { klijenti: Klijent[] }) {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <Button asChild className="bg-blue-600 hover:bg-blue-700">
+        <Button asChild className="bg-blue-600 text-white hover:bg-blue-700">
           <Link href="/klijenti/novi">+ Novi Klijent</Link>
         </Button>
       </div>
