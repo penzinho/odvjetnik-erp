@@ -89,7 +89,7 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
   const headerTitle = format(currentDate, 'MMMM yyyy', { locale: hr });
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)] gap-4">
+    <div className="flex flex-col gap-4 lg:h-[calc(100vh-8rem)]">
       
       {/* --- HEADER --- */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -132,7 +132,7 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6 h-full overflow-hidden">
+      <div className="flex flex-col lg:flex-row gap-6 lg:h-full lg:overflow-hidden">
         
         {/* --- GLAVNI KALENDAR --- */}
         <Card className="flex-1 flex flex-col overflow-hidden border-gray-200 dark:border-slate-800 shadow-sm">
@@ -196,7 +196,7 @@ export default function RokovnikKalendar({ rokovi }: { rokovi: Rok[] }) {
         </Card>
 
         {/* --- DESNA TRAKA (USKORO) --- */}
-        <div className="hidden xl:flex w-80 flex-col gap-4">
+        <div className="flex w-full lg:w-80 lg:shrink-0 flex-col gap-4">
             <Card className="flex-1 border-gray-200 dark:border-slate-800 shadow-sm flex flex-col overflow-hidden">
                 <CardHeader className="pb-3 border-b border-gray-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/60">
                     <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100">Nadolazeće</CardTitle>
